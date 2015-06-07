@@ -1,0 +1,598 @@
+
+$home: #2FC1C8;
+$research: #ff911b;
+$classroom: #ff50b3;
+$technology: #02c807;
+$contact: #c3b6aa;
+$about: #9712eb;
+$publications: #f5dc07;
+
+$color-map: (
+  home: $home,
+  research: $research,
+  classroom: $classroom,
+  technology: $technology,
+  contact: $contact,
+  about: $about,
+  publications: $publications
+);
+
+$orange-dark: #A97726;
+
+@each $theme, $color in $color-map {
+  .theme-#{$theme} {
+    .logo-bar { background-color: $color; }
+    .dark-bar { background-color: darken($color, 10%); }
+    h1 { color: $color; }
+    h3 { color: $color; }
+  }
+}
+
+.theme-home .content .moi {
+  @import 'moi';
+}
+
+body {
+  font-family: "lato", sans-serif;
+}
+
+h1 {
+  font-family: "Amatic SC", Cursive;
+  font-weight: bold;
+  line-height: 0.9em;
+  margin-top: 30px;
+  font-size: 3.7em;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+}
+
+.theme-home .content h1 {
+  font-size: 5.3em;
+  margin-bottom: 0;
+}
+
+h2 {
+  font-family: "lato", sans-serif;
+  line-height: 1.1em;
+  font-size: 1.8em;
+  font-weight: 300;
+  color: #999;
+  margin-bottom: 20px;
+}
+
+.theme-home .content h2 {
+  font-family: "Amatic SC", Cursive;
+  line-height: 1.1em;
+  font-size: 2.6em;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-family: "Amatic SC", Cursive;
+  font-size: 3.5em;
+  font-weight: bold;
+  line-height: 1em;
+  margin-top: 30px;
+}
+
+em {
+  color: $research;
+  font-style: normal;
+  font-weight: bold;
+}
+
+.special {
+  color: #000;
+  font-style: normal;
+  font-weight: bold;
+}
+
+p, ol {
+  line-height: 1.3em;
+  font-size: 0.9em;
+  color: #52483f;
+}
+
+ol {
+  list-style-type: decimal;
+
+  li {
+    margin-bottom: 10px;
+  }
+}
+a {
+  color: #ddd;
+}
+
+.fancy-button {
+  display: inline-block;
+  background-color: $research;
+  border: 2px solid $orange-dark;
+  padding: 3px;
+  text-align: center;
+  width: 100%;
+  font-family: "Amatic SC", Cursive;
+  border-radius: 4px;
+  font-size: 1.8em;
+  color: $orange-dark;
+  max-width: 300px;
+  margin: 0 auto;
+  display: block;
+  transition: opacity 0.1s;
+
+  em {
+    color: #fff;
+  }
+
+  &:hover {
+    background-color: $research;
+    color: $orange-dark;
+    opacity: 0.7;
+    transition: opacity 0.1s;
+    display: cursor;
+  }
+
+  &:active {
+    outline: none;
+  }
+}
+
+.caption {
+  color: #999;
+}
+
+.see-more, .see-more:hover {
+  float: right;
+  width: auto;
+  margin-right: 26px;
+  display: inline-block !important;
+  padding: 10px 40px;
+  color: #666;
+  border-color: #666;
+  background-color: #bbb;
+  background-image: url('see_more_arrow.png');
+  background-repeat: no-repeat;
+  background-position: right center;
+
+}
+
+.divider {
+  height: 1px;
+  width: 100%;
+  background-color: #ddd;
+  margin-top: 28px;
+}
+
+header.sticky-small {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 10;
+
+  .logo-bar {
+    height: 30px;
+  }
+  
+  .logo-image {
+    background-image: url('inkwell.png');
+    background-size: 60px;
+    margin-top: 0;
+    height: 30px;
+  }
+}
+
+.nav-bar.sticky-small {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 35px;
+  z-index: 10;
+  background-color: #fff;
+  opacity: 0.9;
+
+  ul {
+    // margin: 2px 0 0;
+    transition: margin 0.1s;
+
+    .nav-text {
+      position: relative;
+      top: -4px;
+    }
+
+    .nav-item {
+      padding: 3px 0 5px !important;
+      transition: padding 0.2s;
+
+      ul {
+        transition: margin 0.2s;
+        margin-top: 5px !important;
+      }
+    }
+  }
+}
+
+.content.sticky-small {
+  margin-top: 190px;
+}
+
+.logo-bar {
+  height: 100px;
+  text-align: center;
+}
+
+.logo-image {
+  max-width: 300px;
+  width: 100%;
+  height: 70px;
+  display: inline-block;
+  background-image: url('ink12logo.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  margin-top: 15px;
+  opacity: 0.9;
+}
+
+.dark-bar {
+  height: 5px;
+}
+
+header {
+  position: relative;
+}
+
+// Shim to help make sure the submenu bar is aligned to the left
+.force-position {
+  position: inherit;
+}
+
+.nav-bar {
+  text-align: center;
+  border-bottom: 1px solid #888;
+  line-height: 0;
+
+  ul {
+    display: inline-block;
+    // margin: 10px 0;
+    margin: 0;
+    transition: margin 0.1s;
+
+    .nav-item {
+      padding: 14px 0 20px;
+      margin: 0;
+      width: 90px;
+      line-height: normal;
+      transition: padding 0.2s;
+
+      &:hover {
+        ul {
+          display: block;
+        }
+      }
+
+      ul {
+        display: none;
+      }
+      a {
+        text-align: center;
+        font-size: 14px;
+        color: #666;
+
+        .icon {
+          height: 40px;
+          display: inline-block;
+          width: 45px;
+          background-image: url('navbar-icons.png');
+          background-size: 315px auto;
+        }
+
+        .nav-text {
+          display: block;
+        }
+      }
+    }
+
+    // SUBMENU
+
+    .fixed-submenu {
+      margin-bottom: 37px;
+
+      ul {
+        position: absolute;
+        display: block;
+        z-index: 1;
+      }
+    }
+
+    ul {
+      border-style: solid;
+      border-width: 1px 0 1px 0;
+      border-color: #888;
+      margin-top: 20px;
+      z-index: 16;
+      position: absolute;
+      width: 100%;
+      left: 0;
+      background-color: rgba(240,240,240,0.9);
+      padding: 5px;
+      transition: margin 0.2s;
+
+      li {
+        display: inline; 
+
+        a {
+          display: inline-block;
+          padding: 0;
+          margin: 0;
+          line-height: 1em;
+          padding-right: 20px;
+          margin:  5px 20px 5px 0;
+          border-right: 1px solid #888;
+
+          &:hover {
+            color: #aaa;
+          }
+        }
+
+        &:first-child {
+          a {
+            padding-left: 20px;
+            margin-left: 20px;
+            border-left: 1px solid #888;
+          }
+        }
+      }
+    }
+  }
+}
+
+.home {
+  .icon {
+    background-position: 0px 0px;
+  }
+  a:hover {
+    .icon { background-position: 0px -45px; }
+    .nav-text { color: $home; }
+  }
+}
+
+.research {
+  .icon {
+    background-position: -45px 0px;
+  }
+  a:hover {
+    .icon { background-position: -45px -45px; }
+    .nav-text { color: $research; }
+  }
+}
+
+.classroom {
+  .icon {
+    background-position: -90px 0px;
+  }
+  a:hover {
+    .icon { background-position: -90px -45px; }
+    .nav-text { color: $classroom; }
+  }
+}
+
+.technology {
+  .icon {
+    background-position: -135px 0px;
+  }
+  a:hover {
+    .icon { background-position: -135px -45px; }
+    .nav-text { color: $technology; }
+  }
+}
+
+.contact {
+  .icon {
+    background-position: -180px 0px;
+  }
+  a:hover {
+    .icon { background-position: -180px -45px; }
+    .nav-text { color: $contact; }
+  } 
+}
+
+.about {
+  .icon {
+    background-position: -225px 0px;
+  }
+  a:hover {
+    .icon { background-position: -225px -45px; }
+    .nav-text { color: $about; }
+  }
+}
+
+.publications {
+  .icon {
+    background-position: -270px 0px;
+  }
+  a:hover {
+    .icon { background-position: -270px -45px; }
+    .nav-text { color: $publications; }
+  }
+}
+
+.content {
+  margin-bottom: 60px;
+}
+
+.front-gallery {
+  margin-bottom: 10px;
+
+  img {
+    width: 290px;
+    margin: 0 0 20px;
+  }
+}
+
+.tablet-video {
+  margin-top: 20px;
+  width: 610px;
+  height: 350px;
+  background-image: url('tablet-background.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: relative;
+}
+
+.video-player {
+  position: relative;
+  top: 46px;
+  left: 46px;
+}
+
+.light-description {
+  text-align: left;
+  padding-left: 60px;
+  padding-top: 20px;
+  color: #999;
+  font-size: 0.9em;
+}
+
+.pbwi {
+  padding: 0 10px 10px;
+}
+
+// FOOTER
+
+footer {
+  background-color: #555;
+  padding-bottom: 30px;
+
+  h2 {
+    font-size: 1.6em;
+    font-weight: 100;
+    margin-top: 20px;
+    color: #ccc;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #aaa;
+    margin-bottom: 0px;
+    font-family: "Amatic SC", Cursive;
+  }
+
+  h3 {
+    font-size: 0.9em;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  h4 {
+    color: #eee;
+    font-size: 0.83em;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    margin-bottom: 0;
+  }
+
+  p {
+    color: #ddd;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 0.7em;
+    line-height: normal;
+    margin-bottom: 5px;
+  }
+
+  .bottom-right-logos {
+    margin-top: 70px;
+    text-align: right;
+
+    p {
+      color: #aaa;
+    }
+  }
+
+  .bottom-logos {
+    background-image: url('bottomlogos.png');
+    height: 40px;
+    width: 100%;
+    max-width: 136px;
+    display: inline-block;
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+
+  ul {
+    margin: 0; 
+    margin-top: 5px; 
+    padding: 0;
+
+    li {
+      color: #ddd;
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      font-size: 0.8em;
+      line-height: normal;
+      border-top: 1px solid #666;
+      text-transform: uppercase;
+
+      &:last-child {
+        border-bottom: 1px solid #666;
+      }
+
+      a {
+        display: block;
+        padding: 5px 0 5px 5px;
+      }
+
+      a:hover {
+        color: #ddd;
+        background-color: #666;
+      }
+    }
+  }
+}
+
+// PAGE SPECIFIC CSS
+
+// TECHNOLOGY
+.technology-gallery {
+  text-align: right;
+  margin-top: 50px;
+
+  li {
+    float: right;
+  }
+}
+
+// RESEARCH
+.r-item {
+  margin-bottom: 20px !important;
+}
+.r-number {
+  text-align: center;
+
+  .n {
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    line-height: 34px;
+    vertical-align: middle;
+    font-size: 24px;
+    display: inline-block;
+    border: 3px solid $research;
+    color: $research;
+    border-radius: 20px;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .fixed-submenu {
+    margin-bottom: 0 !important;
+
+    ul {
+      top: 367px !important;
+    }
+  }
+  .sticky-small.nav-bar{
+    display: none;
+  }
+}
