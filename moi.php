@@ -9,21 +9,21 @@
       stroke-linecap="round"
       fill="none"/>
 
-    <circle class="c1" cx="0" cy="0" r="8" stroke="#666666" stroke-width="4" fill="rgba(255,255,255,1)" />
-    <circle class="c2" cx="0" cy="0" r="8" stroke="#666666" stroke-width="4" fill="rgba(255,255,255,1)" />
-    <circle class="c3" cx="0" cy="0" r="8" stroke="#666666" stroke-width="4" fill="rgba(255,255,255,1)" />
-    <circle class="c4" cx="0" cy="0" r="8" stroke="#666666" stroke-width="4" fill="rgba(255,255,255,1)" />
+    <circle class="c1" cx="1000" cy="1000" r="8" stroke="#666666" stroke-width="4" fill="rgba(255,255,255,1)" />
+    <circle class="c2" cx="1000" cy="1000" r="8" stroke="#666666" stroke-width="4" fill="rgba(255,255,255,1)" />
+    <circle class="c3" cx="1000" cy="1000" r="8" stroke="#666666" stroke-width="4" fill="rgba(255,255,255,1)" />
+    <circle class="c4" cx="1000" cy="1000" r="8" stroke="#666666" stroke-width="4" fill="rgba(255,255,255,1)" />
 
-    <circle id="circle" r="8" cx="0" cy="0" stroke="#666666" stroke-width="4" fill="#2FC1C8" />
+    <circle id="circle" r="8" cx="1000" cy="1000" stroke="#666666" stroke-width="4" fill="#2FC1C8" />
 
-    <circle class="c1" cx="0" cy="0" r="8" stroke="#666666" stroke-width="4" fill="rgba(255,255,255,0.1)" />
-    <circle class="c2" cx="0" cy="0" r="8" stroke="#666666" stroke-width="4" fill="rgba(255,255,255,0.1)" />
-    <circle class="c3" cx="0" cy="0" r="8" stroke="#666666" stroke-width="4" fill="rgba(255,255,255,0.1)" />
-    <circle class="c4" cx="0" cy="0" r="8" stroke="#666666" stroke-width="4" fill="rgba(255,255,255,0.1)" />
+    <circle class="c1" cx="1000" cy="1000" r="8" stroke="#666666" stroke-width="4" fill="rgba(255,255,255,0.1)" />
+    <circle class="c2" cx="1000" cy="1000" r="8" stroke="#666666" stroke-width="4" fill="rgba(255,255,255,0.1)" />
+    <circle class="c3" cx="1000" cy="1000" r="8" stroke="#666666" stroke-width="4" fill="rgba(255,255,255,0.1)" />
+    <circle class="c4" cx="1000" cy="1000" r="8" stroke="#666666" stroke-width="4" fill="rgba(255,255,255,0.1)" />
 
     <animateMotion 
       xlink:href="#circle"
-      begin="0s"
+      begin="indefinite"
       fill="freeze"
       path=""
       calcMode="spline"
@@ -209,7 +209,6 @@ $(function() {
   p = s1 + s2 + s3
 
   $('path').attr('d', p)
-  $('animateMotion').attr('path', s1)
 
   $('.c1').attr('cx', startX)
   $('.c1').attr('cy', startY)
@@ -223,13 +222,80 @@ $(function() {
   $('.c4').attr('cx', 0)
   $('.c4').attr('cy', (startY+v1+arcr*6+v2+v3))
 
-  $(window).scroll(function (event) {
-    var scroll = $(window).scrollTop();
-    if (scroll > 150) {
-      $('animateMotion').attr('dur', '2.5s')
-    } else {
+  // Circle Movement Animation Controls
+  animatePathS1 = s1
+  animatePathS2 = 'M 0 ' + (startY+v1+arcr*2) + ' ' + s2;
+  animatePathS3 = 'M 0 ' + (startY+v1+arcr*4+v2) + ' ' + s3;
+  $('#circle').attr('cx', 0)
+  $('#circle').attr('cy', 0)
+  $('animateMotion').attr('path', animatePathS1)
+  $('animateMotion').attr('dur', '2.5s')
+  $('animateMotion').get(0).beginElement();
 
-    }
+  // Keeping Track of the Circle Location
+  var circleLocation = 1
+  /*
+  0 - start 
+  1 - moving between start and create
+  2 - create
+  3 - moving between create and interpret
+  4 - interpret
+  5 - moving between interpret and share
+  6 - share
+  */
+
+  var moveCreateInterpret = function() {
+    console.log('moving')
+    $('animateMotion').attr('dur', '4s')
+    $('animateMotion').attr('path', animatePathS2)
+    $('animateMotion').get(0).beginElement();
+    circleLocation = 3
+    setTimeout(function() {
+      circleLocation = 4
+    }, 4000)
+  }
+
+  var moveInterpretShare = function() {
+    $('animateMotion').attr('dur', '4s')
+    $('animateMotion').attr('path', animatePathS3)
+    $('animateMotion').get(0).beginElement();
+    circleLocation = 5
+    setTimeout(function() {
+      circleLocation = 6
+    }, 4000)
+  }
+
+    setTimeout(function() {
+      circleLocation = 2
+    }, 2500)
+  
+  var checkMove1 = '';
+  var checkMove2 = '';
+
+  $(window).scroll(function (event) {
+
+    var scroll = $(window).scrollTop();
+    if (scroll > 970) {
+      if (checkMove2 == '') {
+        checkMove2 = setInterval(function() {
+          if (circleLocation == 4) {
+            moveInterpretShare();
+            clearInterval(checkMove2)
+            checkMove = ''
+          }
+        }, 200)
+      } 
+
+    } else if (scroll > 330) {
+      if (checkMove1 == '') {
+        checkMove1 = setInterval(function() {
+          if (circleLocation == 2) {
+            moveCreateInterpret();
+            clearInterval(checkMove1)
+          }
+        }, 200)
+      }
+    } 
   });
 });
 </script>
